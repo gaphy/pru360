@@ -1,0 +1,15 @@
+.pad{
+    margin-left: 250px;
+}
+
+.popo {
+    pointer-events:none;
+}
+
+.inbound {
+ background:  #E9FFE7;
+}
+
+.outbound {
+background: #FFE7E7;
+}

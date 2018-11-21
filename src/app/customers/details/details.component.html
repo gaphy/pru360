@@ -1,0 +1,322 @@
+<div><app-menu></app-menu></div>
+
+<div class="pad">
+  <div class="main-content">
+    <!-- <app-header></app-header> -->
+    <nav class="navbar navbar-horizontal navbar-expand-lg navbar-dark bg-default">
+        <div class="container">
+            <a class="navbar-brand" href="#">{{customer.name}}</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-default">
+                <div class="navbar-collapse-header">
+                    <div class="row">
+                        <div class="col-6 collapse-brand">
+                            <a href="../../index.html">
+                                <img src="../../assets/img/brand/blue.png">
+                            </a>
+                        </div>
+                        <div class="col-6 collapse-close">
+                            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
+                                <span></span>
+                                <span></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <ul class="navbar-nav ml-lg-auto">
+                    <li class="nav-item dropdown">
+                            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class="media align-items-center">
+                                      <span class="avatar avatar-sm rounded-circle">
+                                        <img alt="Image placeholder" src="assets/img/theme/user.gif">
+                                      </span>
+                                      <div class="media-body ml-2 d-none d-lg-block">
+                                        <span class="mb-0 text-sm  font-weight-bold">{{currentuser.Name}}</span>
+                                      </div>
+                                    </div>
+                                  </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
+                            <a class="dropdown-item" href="#">My Profile</a>
+                            <a class="dropdown-item" href="#">Settings</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#!" class="dropdown-item" [routerLink]="['/']">
+                                <i class="ni ni-user-run"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+                
+            </div>
+        </div>
+    </nav>
+
+    <!-- <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <span class="alert-inner--icon"><i class="ni ni-like-2"></i></span>
+        <span class="alert-inner--text"><strong>Success!</strong> This is a success alert—check it out!</span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div> -->
+       
+    <div class="container-fluid mt--12">
+        <div class="nav-wrapper">
+            <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link mb-sm-3 mb-md-0 active" id="tabs-calls-tab" data-toggle="tab" href="#tabs-calls" role="tab" aria-controls="tabs-icons-text-1" aria-selected="false">
+                      <i class="fas fa-phone mr-2"></i>Call Log</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mb-sm-3 mb-md-0" id="tabs-profile-tab" data-toggle="tab" href="#tabs-profile" role="tab" aria-controls="tabs-icons-text-2" aria-selected="false">
+                      <i class="fas fa-user mr-2"></i>Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mb-sm-3 mb-md-0" id="tabs-contact-tab" data-toggle="tab" href="#tabs-contact" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false">
+                      <i class="fas fa-address-book mr-2"></i>Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mb-sm-3 mb-md-0" id="tabs-accounts-tab" data-toggle="tab" href="#tabs-accounts" role="tab" aria-controls="tabs-icons-text-1" aria-selected="false">
+                      <i class="fas fa-wallet mr-2"></i>Accounts</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link mb-sm-3 mb-md-0" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-5" role="tab" aria-controls="tabs-icons-text-2" aria-selected="false">
+                      <i class="fas fa-leaf mr-2"></i>Loans</a>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link mb-sm-3 mb-md-0" id="tabs-others-tab" data-toggle="tab" href="#tabs-others" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false">
+                      <i class="fas fa-info-circle mr-2"></i>Other Info</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="progress-wrapper" *ngIf="load < 100">
+          <div class="progress-info">
+            <div class="progress-label">
+              <span>Loading data...</span>
+            </div>
+            <div class="progress-percentage">
+              <span>{{load}}%</span>
+            </div>
+          </div>
+          <div class="progress">
+            <div class="progress-bar bg-default" role="progressbar" [attr.aria-valuenow]="load" aria-valuemin="0" aria-valuemax="100" [style.width]="load + '%'"></div>
+          </div>
+        </div>        
+
+        <div class="card shadow">
+            <div class="card-body">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="tabs-calls" role="tabpanel" aria-labelledby="tabs-calls-tab">
+                      <button (click)="modalevent()" type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#modal-call"> <i class="fas fa-plus-circle"></i> New Call</button>
+                      <span style="float: right;color: #C33E3E;" >Failed Calls: {{ failed }}</span>
+                      <div class="row" style="padding-top: 10px;" *ngFor="let log of logs;index as i">
+                        <div class="col-12">
+                            <div class="card border border-dark">
+                              <div class="card-header" [ngClass] = "{
+                                'inbound': log.Type == 'Inbound',
+                                'outbound': log.Type == 'Outbound'}">
+                                  <span class="badge badge-info">{{logs.length - i}}</span>
+                                  {{log.Category}}
+                                  <span style="float: right;" class="badge badge-pill badge-primary">{{log.Officer}}</span>
+                              </div>
+                              <div class="card-body">
+                                <h6 class="card-title">{{log.Stamp | date:'medium'}}</h6>
+                                <p class="card-text">{{log.Remarks}}</p>
+                              </div>
+                              <div class="card-footer text-muted">
+                                  <small><i class="ni ni-watch-time"></i> {{log.duration}}</small>
+                              </div>
+                            </div>
+                        </div>
+                      </div>  
+                      
+
+                    </div>
+                    <div class="tab-pane fade" id="tabs-profile" role="tabpanel" aria-labelledby="tabs-profile-tab">
+                        <div class="table-responsive">
+                            <table class="table align-items-center">
+                                <tbody>
+                                    <tr>
+                                        <td><b>BVN</b></td>
+                                        <td>{{profile[0].bvnno}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Customer Type</b></td>
+                                        <td>{{profile[0].CustTypeDesc}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Gender</b></td>
+                                        <td>{{profile[0].GenderDesc}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Marital Status</b></td>
+                                        <td>{{profile[0].MaritalStatusDesc}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Religion</b></td>
+                                        <td>{{profile[0].ReligionDesc}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Local Govt.</b></td>
+                                        <td>{{profile[0].localgovtname}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>State</b></td>
+                                        <td>{{profile[0].StateName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Country</b></td>
+                                        <td>{{profile[0].CountryName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Birthday</b></td>
+                                        <td>{{profile[0].BirthDate}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Employment</b></td>
+                                        <td>{{profile[0].EmployStatusDesc}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tabs-contact" role="tabpanel" aria-labelledby="tabs-contact-tab">
+                       <div class="table-responsive">
+                          <table class="table table-striped">
+                              <thead>
+                              <tr>
+                                  <td><b>Address</b></td>
+                                  <td><b>Phone</b></td>
+                                  <td><b>Email</b></td>
+                              </tr>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor="let cusad of cusads">
+                                      <td>{{cusad.Address}}</td>
+                                      <td>{{cusad.Phone}}</td>
+                                      <td>{{cusad.Email}}</td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                       </div>
+                    </div>
+                    <div class="tab-pane fade" id="tabs-accounts" role="tabpanel" aria-labelledby="tabs-accounts-tab">
+                        <div class="table-responsive">
+                          <table class="table">
+                              <thead>
+                                  <tr>
+                                      <td><b>Account</b></td>
+                                      <td><b>Name</b></td>
+                                      <td><b>Book Bal</b></td>
+                                      <td><b>Avail Bal</b></td>
+                                      <td><b>Product</b></td>
+                                      <td><b>Branch</b></td>
+                                      <td><b>Account Officer</b></td>
+                                      <td><b>Status</b></td>
+                                      <td><b>Post Status</b></td>
+                                      <td><b>Email Alert</b></td>
+                                      <td><b>SMS Alert</b></td>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor="let acct of accts">
+                                      <td>{{acct.AccountNo}}</td>
+                                      <td>{{acct.AccountDesc}}</td>
+                                      <td>{{acct.bookbal | currency:'₦'}}</td>
+                                      <td>{{acct.Avail | currency:'₦'}}</td>
+                                      <td>{{acct.prodname}}</td>
+                                      <td>{{acct.BranchName}}</td>
+                                      <td>{{acct.RelationshipOfficerName}}</td>
+                                      <td>{{acct.AccountStatusDesc}}</td>
+                                      <td>{{acct.PostStatusDesc}}</td>
+                                      <td>{{acct.EnableEmail | boolText}}</td>
+                                      <td>{{acct.EnableSMS | boolText}}</td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                        </div>
+                    </div>
+                    <!-- <div class="tab-pane fade" id="tabs-icons-text-5" role="tabpanel" aria-labelledby="tabs-icons-text-3-tab">
+                        <p class="description">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth.</p>
+                    </div> -->
+                    <div class="tab-pane fade" id="tabs-others" role="tabpanel" aria-labelledby="tabs-others-tab">                        
+                        <strong class="description">Debit Cards</strong>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <td><b>Account</b></td>
+                                    <td><b>Card</b></td>
+                                    <td><b>Card Count</b></td>
+                                    <td><b>Expiry Date</b></td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let card of cards">
+                                        <td>{{card.AccountNo}}</td>
+                                        <td>{{card.Card}}</td>
+                                        <td>{{card.Count}}</td>
+                                        <td>{{card.Expiry | date}}</td>
+                                        <td *ngIf="card.blocked == 0"><button (click)="blockcard(card.FullPAN)" type="button" class="btn btn-danger" [disabled] = "kana">Block</button></td>
+                                        <td *ngIf="card.blocked != 0"><button (click)="unblockcard(card.FullPAN)" type="button" class="btn btn-success" [disabled] = "kana">Unblock</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br/>
+                        <hr/>
+                        <div class="row">
+                            <div class="col">
+                                <strong class="description">Email Alert Addresses</strong>
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <td><b>Account</b></td>
+                                            <td><b>Email</b></td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let em of tnfs[0]">
+                                                <td>{{em.AccountNo}}</td>
+                                                <td>{{em.EmailAddr}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <strong class="description">SMS Alert Nos.</strong>
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <td><b>Account</b></td>
+                                            <td><b>SMS No.</b></td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let sm of tnfs[1]">
+                                                <td>{{sm.AccountNo}}</td>
+                                                <td>{{sm.SMSNo}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>                       
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <app-call-modal></app-call-modal>
+        <app-footer></app-footer>
+    </div>
+  </div> 
+</div> 

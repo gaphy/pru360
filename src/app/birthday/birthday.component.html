@@ -1,0 +1,51 @@
+<div><app-menu></app-menu></div>
+
+<div class="pad">
+  <div class="main-content">
+    <app-header></app-header>
+
+    <div class="container-fluid mt--7" style="margin-top: -12rem !important;">
+        <!-- Dark table -->
+        <div class="row mt-5">
+          <div class="col">
+            <div class="card bg-default shadow">
+              <div [(ngClass)]="loader">
+                <!-- <h3 class="text-white mb-0">Birthdays</h3> -->
+                <div class="ld ld-ring ld-spin"></div>
+              </div>
+              <div class="table-responsive">
+                <table class="table align-items-center table-dark table-flush">
+                  <thead class="thead-dark">
+                    <tr>
+                        <th></th>
+                        <th>S/N</th>
+                        <!-- <th>CusID</th> -->
+                        <th>Title</th>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Age</th>
+                        <th>Birth date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let bday of bdays;let i = index">
+                      <th><a [routerLink]="['/customer',bday.CusID,bday.CusName]" target="_blank">View</a></th>
+                      <th>{{i + 1}}</th>
+                      <!-- <th>{{bday.CusID}}</th> -->
+                      <th>{{bday.title}}</th>
+                      <th>{{bday.CusName}}</th>
+                      <th>{{bday.GenderDesc}}</th>
+                      <th>{{bday.Age}}</th>
+                      <th>{{bday.BirthDate}}</th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <app-footer></app-footer>
+    </div>
+  </div>
+</div> 

@@ -1,0 +1,81 @@
+<div class="modal fade" id="modal-call" tabindex="-1" role="dialog" aria-labelledby="modal-call" aria-hidden="true">       
+    <div class="modal-dialog modal-success modal-dialog-centered modal-" role="document">
+        <div class="modal-content bg-gradient-success">
+          <form (ngSubmit)="logcall(f)" #f="ngForm">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-title-call">{{customer.name}}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="row">
+                    <!--<div class="col-md-12 text-center"><h5>{{cname}}</h5></div>-->
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label>Call Type</label>
+                            <select class="form-control border-input" name="type" ngModel required>
+                                <option value="" disabled selected>Choose your option</option>
+                                <option>Inbound</option>
+                                <option>Outbound</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select class="form-control border-input" name="status" ngModel required>
+                                    <option value="" disabled selected>Choose your option</option>
+                                    <option>Successful</option>
+                                    <option>Failed</option>
+                                </select>
+                            </div>
+                        </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label>Call Category</label>
+                            <select class="form-control border-input" name="cat" ngModel required>
+                                <option value="" disabled selected>Choose your option</option>
+                                <option>2 days follow up</option>
+                                <option>2 weeks follow up</option>
+                                <option>2 months follow up</option>
+                                <option>Repayment reminder</option>
+                                <option>Past due reminder</option>
+                                <option>Birthday Call</option>
+                                <option>Relationship Management</option>
+                                <option>Enquiries</option>
+                                <option>Others</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Duration</label>
+                            <input type="text" class="form-control border-input" name="duration" ngModel required>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Remarks</label>
+                            <textarea class="form-control border-input" rows="3" name="remarks" ngModel></textarea>
+                        </div>
+                    </div>
+                </div>
+              
+                <!-- <div class="py-3 text-center">
+                    <i class="ni ni-bell-55 ni-3x"></i>
+                    <h4 class="heading mt-4">You should read this!</h4>
+                    <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                </div> -->
+                
+            </div>
+            
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-white" [disabled]="!f.valid || loading"> <i *ngIf="loading" class="fa fa-spinner fa-spin"></i> Save</button>
+                <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal" #closeCallModal>Close</button> 
+            </div>
+            </form>
+        </div>
+    </div>
+  </div>

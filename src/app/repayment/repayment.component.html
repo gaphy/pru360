@@ -1,0 +1,69 @@
+<div><app-menu></app-menu></div>
+
+<div class="pad">
+  <div class="main-content">
+    <app-header></app-header> 
+       
+    <div class="container-fluid mt--7" style="margin-top: -12rem !important;">
+        
+        <!-- Dark table -->
+        <div class="row mt-5">
+          <div class="col">
+            <div class="card bg-default shadow">
+              <div [(ngClass)]="loader">
+                <!-- <h3 class="text-white mb-0">Customers</h3> -->
+                <div class="ld ld-ring ld-spin"></div>
+              </div>
+              <div class="pl-lg-4">
+                  <div class="row">
+                      <div class="col-md-12">
+                          <button class="btn btn-outline-primary" (click)="getrems(7)">7 days</button> 
+                          <button class="btn btn-outline-primary" (click)="getrems(6)">6 days</button> 
+                          <button class="btn btn-outline-primary" (click)="getrems(5)">5 days</button> 
+                          <button class="btn btn-outline-primary" (click)="getrems(4)">4 days</button> 
+                          <button class="btn btn-outline-primary" (click)="getrems(3)">3 days</button> 
+                          <button class="btn btn-outline-primary" (click)="getrems(2)">2 days</button>
+                          <button class="btn btn-outline-primary" (click)="getrems(1)">1 day</button>                                         
+                      </div>
+                  </div>
+                  <br/>
+                  </div>
+              <div class="table-responsive">
+                <table class="table align-items-center table-dark table-flush">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th></th>
+                      <th>S/N</th>
+                      <th scope="col">Account</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Product</th>
+                      <th scope="col">Relationship Officer</th>
+                      <th scope="col">Value Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>                    
+                    <tr *ngFor="let rem of rems; let i = index">  
+                        <th><a [routerLink]="['/customer',rem.cusid,rem.AccountDesc]" target="_blank">View</a></th>      
+                        <th>{{i + 1}}</th>              
+                        <th>{{rem.AccountNo}}</th>
+                        <th>{{rem.AccountDesc}}</th>
+                        <th>{{rem.amount | currency:'₦'}}</th>
+                        <th>{{rem.RelationshipOfficerName}}</th>
+                        <th>{{rem.ValueDate}}</th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="col-md-4">
+            <button type="button" class="btn btn-block btn-warning mb-3" data-toggle="modal" data-target="#modal-notification">Notification</button>
+           
+        </div> -->
+        <app-call-modal></app-call-modal>
+        <app-footer></app-footer>
+    </div>
+  </div>
+</div> 

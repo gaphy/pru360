@@ -1,0 +1,64 @@
+<div><app-menu></app-menu></div>
+
+<div class="pad">
+  <div class="main-content">
+    <app-header></app-header> 
+       
+    <div class="container-fluid mt--7" style="margin-top: -12rem !important;">
+        
+        <!-- Dark table -->
+        <div class="row mt-5">
+          <div class="col">
+            <div class="card bg-default shadow">
+              <div [(ngClass)]="loader">
+                <!-- <h3 class="text-white mb-0">Customers</h3> -->
+                <div class="ld ld-ring ld-spin"></div>
+              </div>
+              <div class="pl-lg-4">
+                  <div class="row">
+                      <div class="col-md-6">
+                          <!-- <label>Customer Name</label> -->
+                          <input [(ngModel)]="accdate" type="date" class="form-control datepicker"/>
+                      </div>
+                      <div class="col-md-3">
+                          <button class="btn btn-info btn-fill" (click)="getnaccounts(accdate)">Load</button>
+                      </div>
+                    </div>
+                  <br/>
+                  </div>
+              <div class="table-responsive">
+                <table class="table align-items-center table-dark table-flush">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th></th>
+                      <th>S/N</th>
+                      <th scope="col">Account</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Product</th>
+                      <th scope="col">Relationship Officer</th>
+                      <th scope="col">Date Opened</th>
+                      <th scope="col">Calls</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let act of acts; let i = index">
+                        <th><a [routerLink]="['/customer',act.cusid,act.AccountDesc]" target="_blank">View</a></th>
+                        <th>{{i + 1}}</th>
+                        <th>{{act.AccountNo}}</th>
+                        <th>{{act.AccountDesc}}</th>
+                        <th>{{act.prodname}}</th>
+                        <th>{{act.RelationshipOfficerName}}</th>
+                        <th>{{act.postingdateadded}}</th>
+                        <th>{{act.calls}}</th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <app-footer></app-footer>
+    </div>
+  </div>
+</div> 
